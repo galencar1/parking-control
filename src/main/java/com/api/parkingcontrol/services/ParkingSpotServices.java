@@ -39,4 +39,8 @@ public class ParkingSpotServices {
     public boolean existsByNumeroVaga(String numeroVaga){
         return parkingSpotRepository.existsByNumeroVaga(numeroVaga);
     }
+    
+    public boolean existsByApartamento(String apartamento){
+        return parkingSpotRepository.existsByApartamento(apartamento);
+    }
 }

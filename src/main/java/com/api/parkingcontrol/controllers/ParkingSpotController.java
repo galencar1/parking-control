@@ -41,6 +41,10 @@ public class ParkingSpotController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro! Veículo já cadastrado!");
         }
 
+        if(parkingSpotServices.existsByNumeroVaga(parkingSpotDto.getNumeroVaga())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro! vaga já utilizada!");
+        }
+
         var parkingSpotModel = new ParkingSpotModel();
         //Somente a Model envia as informações para o banco de dados.
         BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel);//Efetua a conversão de DTO para model.

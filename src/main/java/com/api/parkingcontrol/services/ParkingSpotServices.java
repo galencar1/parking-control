@@ -31,4 +31,16 @@ public class ParkingSpotServices {
         //Utilizando métodos do JPA
         return parkingSpotRepository.save(parkingSpotModel);
     }
+
+    public boolean existsByPlacaVeiculo(String placaVeiculo){
+        return parkingSpotRepository.existsByPlacaVeiculo(placaVeiculo);
+    }
+
+    public boolean existsByNumeroVaga(String numeroVaga){
+        return parkingSpotRepository.existsByNumeroVaga(numeroVaga);
+    }
+    
+    public boolean existsByApartamento(String apartamento){
+        return parkingSpotRepository.existsByApartamento(apartamento);
+    }
 }

@@ -1,9 +1,14 @@
 package com.api.parkingcontrol.services;
 
+import javax.transaction.Transactional;
+
+import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.repositories.ParkingSpotRepository;
+import org.springframework.stereotype.Service;
 
 //import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+
 
 //Service será a camada intermediária entre o controller e o Model.
 //Pode ser feito uma interface do service e uma classe implementando a interface.
@@ -17,5 +22,13 @@ public class ParkingSpotServices {
 
     public ParkingSpotServices(ParkingSpotRepository parkingSpotRepository) {
         this.parkingSpotRepository = parkingSpotRepository;
+    }
+
+
+    @Transactional // Anotamos como transactional para que nas transações, caso ocorra erro efetua
+    //automaticamente o callback
+    public ParkingSpotModel save(ParkingSpotModel parkingSpotModel) {
+        //Utilizando métodos do JPA
+        return parkingSpotRepository.save(parkingSpotModel);
     }
 }

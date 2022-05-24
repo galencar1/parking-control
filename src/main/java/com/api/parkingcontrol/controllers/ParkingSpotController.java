@@ -36,20 +36,6 @@ public class ParkingSpotController {
     //Recebe os dados de entrada através do DTO.
     //Colocar o @Valid para que seja efetuada a validação que foi iniciado na camada DTO
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto){
-        //Inserindo validações
-        
-        //Verifica se o veiculo já está cadastrado(Utilizando a placa)
-        if(parkingSpotServices.existsByplacaVeiculo(parkingSpotDto.getPlacaVeiculo())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro: Placa do Veículo já Existe.");
-        }
-        //Verifica se a vaga já está sendo utilizada.
-        if(parkingSpotServices.existsBynumeroVaga(parkingSpotDto.getNumeroVaga())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro: Vaga já está sendo utilizada");
-        }
-        //Verifica se o Apartamento já tem um veiculo cadastrado
-        if(parkingSpotServices.existsByApeBloco(parkingSpotDto.getApartamento(),parkingSpotDto.getBloco())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro:Vaga já cadastrada para esse Apto/Bloco");
-        }
         var parkingSpotModel = new ParkingSpotModel();
         //Somente a Model envia as informações para o banco de dados.
         BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel);//Efetua a conversão de DTO para model.

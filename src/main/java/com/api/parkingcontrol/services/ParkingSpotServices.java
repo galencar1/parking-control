@@ -7,6 +7,9 @@ import javax.transaction.Transactional;
 
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.repositories.ParkingSpotRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +55,8 @@ public class ParkingSpotServices {
 
 
     //Método que retorna a lista e está  sendo chamado ao controller.
-    public List<ParkingSpotModel> findAll() {
-        return parkingSpotRepository.findAll();
+    public Page<ParkingSpotModel> findAll(Pageable pageable) {
+        return parkingSpotRepository.findAll(pageable);
     }
 
     public Optional<ParkingSpotModel> findById(Long id) {

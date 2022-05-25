@@ -1,5 +1,7 @@
 package com.api.parkingcontrol.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import com.api.parkingcontrol.models.ParkingSpotModel;
@@ -45,5 +47,11 @@ public class ParkingSpotServices {
     
     public boolean existsByApartamento(String apartamento){
         return parkingSpotRepository.existsByApartamento(apartamento);
+    }
+
+
+    //Método que retorna a lista e está  sendo chamado ao controller.
+    public List<ParkingSpotModel> findAll() {
+        return parkingSpotRepository.findAll();
     }
 }

@@ -32,6 +32,9 @@ public class ParkingSpotServices {
         return parkingSpotRepository.save(parkingSpotModel);
     }
 
+
+    //Faz a instancia dos métodos para efetuar as verificações
+    //Após efetuada a instancia, colocar as verificações no camada controller!
     public boolean existsByPlacaVeiculo(String placaVeiculo){
         return parkingSpotRepository.existsByPlacaVeiculo(placaVeiculo);
     }

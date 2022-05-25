@@ -36,15 +36,18 @@ public class ParkingSpotController {
     //Recebe os dados de entrada através do DTO.
     //Colocar o @Valid para que seja efetuada a validação que foi iniciado na camada DTO
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto){
+        //Verificações
 
+        //Verifica se o veiculo já está cadastrado através da placa
         if(parkingSpotServices.existsByPlacaVeiculo(parkingSpotDto.getPlacaVeiculo())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro! Veículo já cadastrado!");
         }
-
+        //Verifica se a vaga já está sendo utilizada através do número da vaga
         if(parkingSpotServices.existsByNumeroVaga(parkingSpotDto.getNumeroVaga())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro! vaga já utilizada!");
         }
-
+        //Verifica se já existe uma vaga registrada pra o apartamento. 
+        //Cada apartamento tem direito a uma vaga.
         if(parkingSpotServices.existsByApartamento(parkingSpotDto.getApartamento())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro!já existe uma vaga registrada para esse Ap/Bloco");
         }

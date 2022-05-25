@@ -59,4 +59,9 @@ public class ParkingSpotServices {
     public Optional<ParkingSpotModel> findById(Long id) {
         return parkingSpotRepository.findById(id);
     }
+
+    @Transactional
+    public void delete(ParkingSpotModel parkingSpotModel) {
+        parkingSpotRepository.delete(parkingSpotModel);
+    }
 }

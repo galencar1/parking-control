@@ -1,8 +1,7 @@
 package com.api.parkingcontrol.models;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,14 +12,14 @@ import javax.persistence.Table;
 
 //Inserindo anotações para criar o mapeamento com o JPA
 @Entity
-@Table (name="TB_PARKING_SPOT")  // Anotação para criar a tabela no banco de dados
+@Table (name="TB_PARKING_SPOT1")  // Anotação para criar a tabela no banco de dados
 
-public class ParkingSpotModel implements Serializable {
-    private static final long serialVersionUID = 1L; // Trata das conversões do Java para o DB.
+public class ParkingSpotModel  {
+    //private static final long serialVersionUID = 1L; // Trata das conversões do Java para o DB.
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) //  Id será gerado de forma automática
-    private UUID id;
+    private Long id;
 
     //Nullable - Define se o campo pode ser nulo ou não. Unique - Define se o campo será unico ou não.
     @Column(nullable = false, unique = true, length = 10)
@@ -52,14 +51,14 @@ public class ParkingSpotModel implements Serializable {
 
     //Gerando Getters e Setters
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
+    
     public String getNumeroVaga() {
         return numeroVaga;
     }

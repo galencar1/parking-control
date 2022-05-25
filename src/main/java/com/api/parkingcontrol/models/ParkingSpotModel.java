@@ -2,7 +2,6 @@ package com.api.parkingcontrol.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +19,7 @@ public class ParkingSpotModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) //  Id será gerado de forma automática
-    private UUID id;
+    private Long id;
 
     //Nullable - Define se o campo pode ser nulo ou não. Unique - Define se o campo será unico ou não.
     @Column(nullable = false, unique = true, length = 10)
@@ -52,14 +51,14 @@ public class ParkingSpotModel implements Serializable {
 
     //Gerando Getters e Setters
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
+    
     public String getNumeroVaga() {
         return numeroVaga;
     }

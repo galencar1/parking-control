@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -90,5 +91,36 @@ public class ParkingSpotController {
         }
         parkingSpotServices.delete(parkingSpotModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Vaga deletada com Sucesso!");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "id")Long id,
+                                                    @RequestBody @Valid ParkingSpotDto parkingSpotDto){
+        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotServices.findById(id);
+        if(!parkingSpotModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Vaga não encontrada!");
+        }
+        // Precisamos converter DTO para MODEL, por isso instanciamos objeto PArking Spot Model.
+        //Precisamos setar todos os campos que serão alterados.
+        //Lembrando que o ID nunca é alterado.
+        //Data de registro também não pode ser alterada.
+
+        //Primeida forma de fazer abaixo
+        /*var parkingSpotModel = parkingSpotModelOptional.get();
+        parkingSpotModel.setNumeroVaga(parkingSpotDto.getNumeroVaga());
+        parkingSpotModel.setPlacaVeiculo(parkingSpotDto.getPlacaVeiculo());
+        parkingSpotModel.setMarcaCarro(parkingSpotDto.getMarcaCarro());
+        parkingSpotModel.setModeloCarro(parkingSpotDto.getModeloCarro());
+        parkingSpotModel.setCorCarro(parkingSpotDto.getCorCarro());
+        parkingSpotModel.setNomeResponsavel(parkingSpotDto.getNomeResponsavel());
+        parkingSpotModel.setApartamento(parkingSpotDto.getApartamento());
+        parkingSpotModel.setBloco(parkingSpotDto.getBloco());*/
+
+        //Segunda forma de fazer - mais fácil
+        var parkingSpotModel = new ParkingSpotModel();
+        BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel);
+        parkingSpotModel.setId(parkingSpotModelOptional.get().getId());
+        parkingSpotModel.setDataRegistro(parkingSpotModelOptional.get().getDataRegistro());
+        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotServices.save(parkingSpotModel));
     }
 }

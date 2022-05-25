@@ -1,6 +1,6 @@
 package com.api.parkingcontrol.models;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -12,10 +12,10 @@ import javax.persistence.Table;
 
 //Inserindo anotações para criar o mapeamento com o JPA
 @Entity
-@Table (name="TB_PARKING_SPOT")  // Anotação para criar a tabela no banco de dados
+@Table (name="TB_PARKING_SPOT1")  // Anotação para criar a tabela no banco de dados
 
-public class ParkingSpotModel implements Serializable {
-    private static final long serialVersionUID = 1L; // Trata das conversões do Java para o DB.
+public class ParkingSpotModel  {
+    //private static final long serialVersionUID = 1L; // Trata das conversões do Java para o DB.
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) //  Id será gerado de forma automática
